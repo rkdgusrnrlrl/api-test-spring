@@ -32,7 +32,11 @@ public class ApiCallerTest {
 
     @Test
     public void saveApiCaller() {
-        ApiCaller apiCaller = new ApiCaller(0l, "http://api.dakbutfly.me", "/helle", "POST", "", "");
+        ApiCaller apiCaller = ApiCaller.builder()
+                                .baseUrl("http://api.dakbutfly.me")
+                                .apiUrl("/hello")
+                                .method("POST")
+                                .build();
         apiCallerRepository.save(apiCaller);
         List<ApiCaller> all = apiCallerRepository.findAll();
         assertNotNull(all.get(0));

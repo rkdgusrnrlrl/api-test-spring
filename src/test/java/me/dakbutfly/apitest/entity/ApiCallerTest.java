@@ -2,6 +2,7 @@ package me.dakbutfly.apitest.entity;
 
 import me.dakbutfly.apitest.demo.MongConfig;
 import me.dakbutfly.apitest.repository.ApiCallerRepository;
+import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,14 @@ public class ApiCallerTest {
     @Test
     public void testIsOk() {
         List<ApiCaller> all = apiCallerRepository.findAll();
+    }
 
+    @Test
+    public void saveApiCaller() {
+        ApiCaller apiCaller = new ApiCaller(0l, "http://api.dakbutfly.me", "/helle", "POST", "", "");
+        apiCallerRepository.save(apiCaller);
+        List<ApiCaller> all = apiCallerRepository.findAll();
+        assertNotNull(all.get(0));
     }
 
 }

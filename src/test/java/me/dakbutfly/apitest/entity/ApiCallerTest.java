@@ -1,27 +1,19 @@
 package me.dakbutfly.apitest.entity;
 
-import me.dakbutfly.apitest.demo.MongConfig;
 import me.dakbutfly.apitest.repository.ApiCallerRepository;
 import static org.junit.Assert.*;
-import org.junit.Rule;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
-import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoProperties;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Import;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = MongConfig.class)
+@ContextConfiguration(classes = MongoUnitTestConfig.class)
 @SpringBootTest
 public class ApiCallerTest {
 

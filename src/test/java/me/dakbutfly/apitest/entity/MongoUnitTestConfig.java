@@ -1,5 +1,6 @@
-package me.dakbutfly.apitest.demo;
+package me.dakbutfly.apitest.entity;
 
+import com.github.fakemongo.Fongo;
 import com.mongodb.MongoClient;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
@@ -7,10 +8,11 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @Configuration
 @EnableMongoRepositories(basePackages = "me.dakbutfly.apitest.repository")
-public class MongConfig extends AbstractMongoConfiguration {
+public class MongoUnitTestConfig extends AbstractMongoConfiguration {
     @Override
     public MongoClient mongoClient() {
-        return new MongoClient("127.0.0.1", 27017);
+        Fongo agenda = new Fongo("agenda");
+        return agenda.getMongo();
     }
 
     @Override

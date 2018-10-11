@@ -49,4 +49,30 @@ public class TestApiCallerController {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(0));
     }
+
+    @Test
+    public void whenCreateApiCallerShouldBeExistOneApiCaller() throws Exception {
+        ApiCaller apiCaller = ApiCaller.builder()
+                .baseUrl("http://api.dakbutfly.me")
+                .apiUrl("/hello")
+                .method("POST")
+                .build();
+
+        when(apiCallerRepository.save(apiCaller)).thenReturn(apiCaller);
+
+
+        mockMvc.perform(post("/api/apicallers").content(asJsonString(apiCaller)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("ok").value(true));
+
+        verify(apiCallerRepository, times(1)).save(refEq(apiCaller));
+    }
+
+    static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
